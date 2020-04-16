@@ -9,12 +9,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		
 		private Item[] iterator;
 		private int index;
-		private RandomizedQueueIterator(Item[] queue){
-			iterator = queue;
+		private RandomizedQueueIterator(Item[] queue,int size){
+			iterator = (Item[])new Object[size];
+			for (int i=0; i<size; i++) {
+				iterator[i]=queue[i];
+			}
 			StdRandom.shuffle(iterator);
 			index=0;
 		}
-		
 		@Override
 		public boolean hasNext() {
 			return (index<iterator.length);
@@ -89,7 +91,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return an independent iterator over items in random order
     public Iterator<Item> iterator(){
-    	return new RandomizedQueueIterator(array);
+    	return new RandomizedQueueIterator(array,size);
     }
     
     private void DoubleSize() {
